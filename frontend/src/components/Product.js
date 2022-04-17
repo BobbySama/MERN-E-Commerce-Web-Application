@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card } from 'react-bootstrap';
 import Rating from './Rating';
 
+// se foloseste in HomeScreen
 const Product = ({ productProp }) => {
   return (
     <Card className='my-3 p-3 rounded'>
