@@ -1,5 +1,25 @@
 {
   "dependencies": {
-    "react-bootstrap": "^2.2.3"
-  }
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15",
+    "react-bootstrap": "^2.2.3",
+    "react-scripts": "^5.0.1"
+  },
+  "name": "licenta",
+  "version": "1.0.0",
+  "description": "e-commerce shop",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BobbySama/Licenta.git"
+  },
+  "author": "Bogdan Zarcu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BobbySama/Licenta/issues"
+  },
+  "homepage": "https://github.com/BobbySama/Licenta#readme"
 }
