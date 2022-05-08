@@ -18,12 +18,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { listProductDetails } from '../actions/productActions';
 
 const ProductScreen = () => {
-  const [qty, setQty] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
-  const productDetails = useSelector((state) => state.productDetails);
+
+  //ste initial value of the quantity to 1 by default
+  const [qty, setQty] = useState(1);
+
+  const productDetails = useSelector((state) => state.storeProductDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
