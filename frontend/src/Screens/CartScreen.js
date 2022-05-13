@@ -11,7 +11,7 @@ import {
   Button,
   Card,
 } from 'react-bootstrap';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = () => {
   const productId = useParams().id;
@@ -29,8 +29,13 @@ const CartScreen = () => {
     }
   }, [dispatch, productId, qty]);
 
-  const removeFromCartHandler = (id) => {};
+  // remove item from cart
+  const removeFromCartHandler = (id) => {
+    dispatch(removeFromCart(id));
+    console.log('a fost apasat');
+  };
 
+  // go to the checkout page
   const checkoutHandler = () => {
     navigate(`/login?redirect=shipping`);
   };
@@ -95,9 +100,9 @@ const CartScreen = () => {
                     <Button
                       type='button'
                       variant='light'
-                      onClick={() => removeFromCartHandler(item.product)}
+                      onClick={() => removeFromCartHandler(item.productId)}
                     >
-                      <i className='fas fa-trash'></i>
+                      <i className='fas fa-trash trash-color'></i>
                     </Button>
                   </Col>
                 </Row>

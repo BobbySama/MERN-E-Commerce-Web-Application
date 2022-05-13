@@ -26,3 +26,10 @@ h3{
     color: rgb(186, 194, 139);
   }
 
+  .trash-color{
+      color: grey !important;
+  }
+
+  .trash-color:hover{
+    color: rgb(183, 98, 98) !important;
+}
