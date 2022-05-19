@@ -4,7 +4,7 @@ import connectDB from './config/db.js';
 import colors from 'colors';
 
 import productRoutes from './routes/productRoutes.js';
-import userRoutes from '/routes/userRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 
 dotenv.config();
 const app = express();
