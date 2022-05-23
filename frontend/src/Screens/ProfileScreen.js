@@ -1,0 +1,141 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Form, Button, Row, Col } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+import { getUserDetails } from '../actions/userActions';
+
+const ProfileScreen = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  //   messages in case the user does not fill the inputs propperly
+  const [passwordConfirmMessage, setPasswordConfirmMessage] = useState(null);
+  const [passwordMessage, setPasswordMessage] = useState(null);
+  const [nameMessage, setNameMessage] = useState(null);
+  const [emailMessage, setemailMessage] = useState(null);
+
+  const userDetails = useSelector((state) => state.storeUserDetails);
+  const { loading, error, user } = userDetails;
+
+  //asta MERGE
+  const userLogin = useSelector((state) => state.storeUserLogin);
+  const { userInfo } = userLogin;
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/login');
+    } else {
+      if (!user || Object.keys(user).length === 0) {
+        dispatch(getUserDetails('profile'));
+      }
+      setName(user.name);
+      setEmail(user.email);
+    }
+  }, [dispatch, userInfo, user, navigate]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    if (password !== confirmPassword) {
+      setPasswordConfirmMessage('Passwords do not match');
+    } else if (name === '' || name === null) {
+      setNameMessage('Please enter an username');
+    } else if (email === '' || email === null) {
+      setNameMessage('Please enter an email');
+    } else if (password === '' || name === null) {
+      setNameMessage('Please enter a password');
+    } else {
+      //   dispatch(register(name, email, password));
+      // navigate('/');
+      console.log('s-a dispaciuit profile screenu');
+    }
+  };
+  return (
+    <Row>
+      <Col md={3}>
+        <h2>User Profile</h2>
+
+        {/* if the passwords field is empty display an warning */}
+        {passwordMessage && (
+          <Message variant='danger'>{passwordMessage}</Message>
+        )}
+
+        {/* if the passwords do not match display a warning */}
+        {passwordConfirmMessage && (
+          <Message variant='danger'>{passwordConfirmMessage}</Message>
+        )}
+
+        {/* if the name field is empty display an warning */}
+        {nameMessage && <Message variant='danger'>{nameMessage}</Message>}
+
+        {/* if the email field is empty display an warning */}
+        {emailMessage && <Message variant='danger'>{emailMessage}</Message>}
+
+        {/* loading phase */}
+        {loading && <Loader></Loader>}
+
+        <Form onSubmit={submitHandler}>
+          {/* name form */}
+          <Form.Group controlId='name'>
+            <Form.Label>Your wished username</Form.Label>
+            <Form.Control
+              type='name'
+              placeholder='Enter your username'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          {/* email form */}
+          <Form.Group controlId='email'>
+            <Form.Label>Email Address</Form.Label>
+            <Form.Control
+              type='email'
+              placeholder='Enter your email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          {/* password form */}
+          <Form.Group controlId='password'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Enter your password'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          {/* confirm password form */}
+          <Form.Group controlId='confirmPassword'>
+            <Form.Label>Password Confirmation</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Enter the same password'
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            ></Form.Control>
+          </Form.Group>
+
+          <Button type='submit' variant='primary'>
+            Update Profile
+          </Button>
+        </Form>
+      </Col>
+
+      <Col md={9}>My orders</Col>
+    </Row>
+  );
+};
+
+export default ProfileScreen;

@@ -2,6 +2,8 @@ import axios from 'axios';
 import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 
 export const addToCart = (id, qty) => async (dispatch, getState) => {
+  console.log('asta vine din add to cart din actions');
+
   const { data } = await axios.get(`../api/products/${id}`);
 
   dispatch({
