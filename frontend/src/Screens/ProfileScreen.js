@@ -4,7 +4,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUpdateUserProfile, getUserDetails } from '../actions/userActions';
+import { updateUserProfile, getUserDetails } from '../actions/userActions';
 
 const ProfileScreen = () => {
   const navigate = useNavigate();
@@ -52,7 +52,7 @@ const ProfileScreen = () => {
     } else if (email === '' || email === null) {
       setEmailMessage('Please enter an email');
     } else {
-      dispatch(getUpdateUserProfile({ id: user._id, name, email, password }));
+      dispatch(updateUserProfile({ id: user._id, name, email, password }));
       console.log('s-a dispaciuit profile screenu');
     }
   };

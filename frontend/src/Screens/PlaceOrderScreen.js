@@ -1,18 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { ListGroup, Image, Card, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
+import { createOrder } from '../actions/orderActions';
+
 const PlaceOrderScreen = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const cart = useSelector((state) => state.storeCart);
+  console.log('in cart din orderscreen se afla: ', cart);
 
   //   Compute prices
   const itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price, 0);
   const shippingPrice = itemsPrice > 100 ? 0 : 20;
   const totalPrice = itemsPrice + shippingPrice;
 
+  const orderCreate = useSelector((state) => state.storeOrderCreate);
+  const { order, success } = orderCreate;
+  console.log(orderCreate);
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line
+  }, [navigate, success]);
+
   const placeOrderHandler = () => {
     console.log('order placed');
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod ? cart.paymentMethod : 'PayPall',
+        itemsPrice: itemsPrice,
+        shippingPrice: shippingPrice,
+        totalPrice: totalPrice,
+      })
+    );
   };
 
   return (
