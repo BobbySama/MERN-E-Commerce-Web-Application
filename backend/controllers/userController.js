@@ -25,8 +25,6 @@ const authUser = asyncHandler(async (req, res) => {
 
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-  console.log('se intampla ceva');
-  console.log(user);
   if (user) {
     res.json({
       _id: user._id,

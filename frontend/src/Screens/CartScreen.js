@@ -40,6 +40,11 @@ const CartScreen = () => {
     navigate(`/login?redirect=shipping`);
   };
 
+  // // go to the checkout page
+  // const checkoutHandler = () => {
+  //   navigate(`/${redirect}`);
+  // };
+
   return (
     <Row>
       <Col md={8}>

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getUserDetails } from '../actions/userActions';
+import { getUpdateUserProfile, getUserDetails } from '../actions/userActions';
 
 const ProfileScreen = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -18,16 +17,18 @@ const ProfileScreen = () => {
 
   //   messages in case the user does not fill the inputs propperly
   const [passwordConfirmMessage, setPasswordConfirmMessage] = useState(null);
-  const [passwordMessage, setPasswordMessage] = useState(null);
   const [nameMessage, setNameMessage] = useState(null);
-  const [emailMessage, setemailMessage] = useState(null);
+  const [emailMessage, setEmailMessage] = useState(null);
 
   const userDetails = useSelector((state) => state.storeUserDetails);
-  const { loading, error, user } = userDetails;
+  const { loading, user } = userDetails;
 
   //asta MERGE
   const userLogin = useSelector((state) => state.storeUserLogin);
   const { userInfo } = userLogin;
+
+  const userUpdateProfile = useSelector((state) => state.storeUserProfile);
+  const { success } = userUpdateProfile;
 
   useEffect(() => {
     if (!userInfo) {
@@ -49,12 +50,9 @@ const ProfileScreen = () => {
     } else if (name === '' || name === null) {
       setNameMessage('Please enter an username');
     } else if (email === '' || email === null) {
-      setNameMessage('Please enter an email');
-    } else if (password === '' || name === null) {
-      setNameMessage('Please enter a password');
+      setEmailMessage('Please enter an email');
     } else {
-      //   dispatch(register(name, email, password));
-      // navigate('/');
+      dispatch(getUpdateUserProfile({ id: user._id, name, email, password }));
       console.log('s-a dispaciuit profile screenu');
     }
   };
@@ -62,11 +60,6 @@ const ProfileScreen = () => {
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
-
-        {/* if the passwords field is empty display an warning */}
-        {passwordMessage && (
-          <Message variant='danger'>{passwordMessage}</Message>
-        )}
 
         {/* if the passwords do not match display a warning */}
         {passwordConfirmMessage && (
@@ -78,6 +71,9 @@ const ProfileScreen = () => {
 
         {/* if the email field is empty display an warning */}
         {emailMessage && <Message variant='danger'>{emailMessage}</Message>}
+
+        {/* display a success message if the update was done */}
+        {success && <Message variant='light'>Profile updated</Message>}
 
         {/* loading phase */}
         {loading && <Loader></Loader>}
@@ -127,13 +123,15 @@ const ProfileScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Button type='submit' variant='primary'>
+          <Button type='submit' variant='primary' className='btn-margin-top'>
             Update Profile
           </Button>
         </Form>
       </Col>
 
-      <Col md={9}>My orders</Col>
+      <Col md={9}>
+        <h2>My orders</h2>
+      </Col>
     </Row>
   );
 };

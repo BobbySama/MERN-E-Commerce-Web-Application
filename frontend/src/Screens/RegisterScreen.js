@@ -115,14 +115,14 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' className='btn-margin-top'>
           Register me now
         </Button>
       </Form>
 
       <Row className='py-3'>
         <Col>
-          Already part of the team?
+          Already part of the team?&nbsp;&nbsp;
           <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
             Login
           </Link>

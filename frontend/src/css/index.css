@@ -37,3 +37,11 @@
   .trash-color:hover{
     color: rgb(183, 98, 98) !important;
 }
+
+.btn-margin-top{
+    margin-top:15px !important;
+}
+
+.form-spacing{
+    margin-top:20px !important;
+}
