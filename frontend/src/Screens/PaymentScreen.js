@@ -13,14 +13,14 @@ const PaymentScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [paymentMethod, setPaymentMethod] = useState('PayPall');
+
   const cart = useSelector((state) => state.storeCart);
   const { shippingAddress } = cart;
 
   if (!shippingAddress) {
     navigate('/shipping');
   }
-
-  const [paymentMethod, setPaymentMethod] = useState('PayPall');
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -29,10 +29,8 @@ const PaymentScreen = () => {
     console.log('aici e submitul la payment');
   };
 
-  const changePaymentMethod = (e) => {
+  const handleChange = (e) => {
     setPaymentMethod(e.target.value);
-    console.log(e.target.value);
-    console.log(paymentMethod);
   };
 
   return (
@@ -49,8 +47,8 @@ const PaymentScreen = () => {
               id='Cash'
               name='paymentMethod'
               value='Cash'
-              checked
-              onChange={changePaymentMethod}
+              checked={paymentMethod === 'Cash'}
+              onChange={handleChange}
             ></Form.Check>
             <Form.Check
               type='radio'
@@ -58,8 +56,8 @@ const PaymentScreen = () => {
               id='PayPall'
               name='paymentMethod'
               value='PayPall'
-              checked
-              onChange={changePaymentMethod}
+              checked={paymentMethod === 'PayPall'}
+              onChange={handleChange}
             ></Form.Check>
           </Col>
         </Form.Group>

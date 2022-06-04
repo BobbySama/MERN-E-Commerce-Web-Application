@@ -13,9 +13,9 @@ const orderSchema = mongoose.Schema(
         qty: { type: Number, required: true },
         image: { type: String, required: true },
         price: { type: Number, required: true },
-        product: {
+        productId: {
           type: mongoose.Schema.Types.ObjectID,
-          required: true,
+          required: true, // nu sunt sigur de asta daca trebuie sa fie false inca (LIPSESTE PRODUCT DIN ORDER ITEMS)
           ref: 'Product',
         },
       },

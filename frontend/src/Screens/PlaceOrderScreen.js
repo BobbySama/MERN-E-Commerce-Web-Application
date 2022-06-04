@@ -10,7 +10,7 @@ const PlaceOrderScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.storeCart);
-  console.log('in cart din orderscreen se afla: ', cart);
+  // console.log('in cart din orderscreen se afla: ', cart);
 
   //   Compute prices
   const itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price, 0);
@@ -19,11 +19,14 @@ const PlaceOrderScreen = () => {
 
   const orderCreate = useSelector((state) => state.storeOrderCreate);
   const { order, success } = orderCreate;
-  console.log(orderCreate);
+  console.log('primul succes: ', success);
+  console.log('orderCreate:', orderCreate);
 
   useEffect(() => {
     if (success) {
+      console.log('in useEffect :', order);
       navigate(`/order/${order._id}`);
+      console.log('al doilea succes: ', success);
     }
     // eslint-disable-next-line
   }, [navigate, success]);
@@ -40,6 +43,10 @@ const PlaceOrderScreen = () => {
         totalPrice: totalPrice,
       })
     );
+
+    console.log('in useEffect ORDER:', order);
+
+    console.log('sa vedem ce returneaza order dupa dispatch: ', order);
   };
 
   return (

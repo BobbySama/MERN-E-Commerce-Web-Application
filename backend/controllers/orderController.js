@@ -11,8 +11,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
     totalPrice,
   } = req.body;
 
-  //   console.log('din backend primul orderItems inainte de creare:', orderItems);
-
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error('No order items');
@@ -29,10 +27,10 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save();
 
-    console.log(
-      'din backend al doielea orderItems dupa creare:',
-      createdOrder.orderItems
-    );
+    // console.log(
+    //   'din backend al doielea orderItems dupa creare:',
+    //   createdOrder.orderItems
+    // );
     res.status(201).json(createdOrder);
   }
 });

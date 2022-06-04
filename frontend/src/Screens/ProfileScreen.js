@@ -52,8 +52,15 @@ const ProfileScreen = () => {
     } else if (email === '' || email === null) {
       setEmailMessage('Please enter an email');
     } else {
+      //AICI SE SCHIMBA TOATE
+
       dispatch(updateUserProfile({ id: user._id, name, email, password }));
       console.log('s-a dispaciuit profile screenu');
+
+      // userInfo.name = user.name;
+      // localStorage.setItem('userInfo', JSON.stringify(userInfo));
+
+      // window.location.reload(false);
     }
   };
   return (
