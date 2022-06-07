@@ -70,7 +70,7 @@ const PlaceOrderScreen = () => {
               <h2>Payment Method</h2>
               <p>
                 <strong style={{ fontSize: '20px' }}>Method:&nbsp; </strong>
-                {cart.paymentMethod}
+                {cart.paymentMethod ? cart.paymentMethod : 'PayPall'}
               </p>
             </ListGroup.Item>
 

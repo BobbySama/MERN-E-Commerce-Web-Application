@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { application } from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import colors from 'colors';
@@ -22,6 +22,10 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 
 app.use('/api/orders', orderRoutes);
+
+app.use('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
 
 const PORT = process.env.PORT || 5000;
 
