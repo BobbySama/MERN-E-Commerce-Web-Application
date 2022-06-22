@@ -7,6 +7,7 @@ import {
   USER_DETAILS_SUCCES,
   USER_LIST_FAIL,
   USER_LIST_REQUEST,
+  USER_LIST_RESET,
   USER_LIST_SUCCES,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -58,6 +59,10 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: ORDER_LIST_MY_RESET,
   });
+  dispatch({
+    type: USER_LIST_RESET,
+  });
+  window.location.reload(false);
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -145,7 +150,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   }
 };
 
-export const listUsersProfile = () => async (dispatch, getState) => {
+export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
 

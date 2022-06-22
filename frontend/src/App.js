@@ -13,6 +13,7 @@ import ShippingScreen from './Screens/ShippingScreen';
 import PaymentScreen from './Screens/PaymentScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 import OrderScreen from './Screens/OrderScreen';
+import UserListScreen from './Screens/UserListScreen';
 
 function App() {
   document.body.style.background = '#3596B5';
@@ -22,6 +23,9 @@ function App() {
       <main className='py-3'>
         <Container>
           <Routes>
+            {/* Admin screen */}
+            <Route path='/admin/userlist' element={<UserListScreen />} />
+
             {/* LoginScreen */}
             <Route path='/login' element={<LoginScreen />} />
 
