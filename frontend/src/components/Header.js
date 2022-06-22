@@ -8,7 +8,6 @@ import {
   NavDropdown,
   Form,
   FormControl,
-  Button,
 } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 import logo from './logo.ico';
