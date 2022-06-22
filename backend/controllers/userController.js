@@ -99,38 +99,22 @@ const getUsers = asyncHandler(async (req, res) => {
   res.json(users);
 });
 
-// ==============  TESTING SECTION  ========================
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (user) {
+    await user.remove();
+    res.json({ message: 'user removed' });
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+});
 
-// const authUser = asyncHandler(async (req, res) => {
-//   const { email, password } = req.body;
-//   console.log('am scris ca email:', email);
-//   console.log('am scris ca parola:', password);
-
-//   const user = await User.findOne({ email });
-
-//   console.log('am primit ca email:', user.email);
-//   console.log('am primit ca parola:', user.password);
-//   console.log('am primit ca nume:', user.name);
-
-//   // res.send({ email, password });
-
-//   if (user) {
-//     res.json({
-//       _id: user._id,
-//       name: user.name,
-//       email: user.email,
-//       isAdmin: user.isAdmin,
-//       token: generatedToken(user._id),
-//     });
-//   } else {
-//     res.status(401);
-//     throw new Error('Invalid email or password=============');
-//   }
-// });
-// export { authUser };
-
-// const getUserProfile = asyncHandler(async (req, res) => {
-//   res.send('SUCCESS');
-// });
-
-export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };
+export {
+  authUser,
+  registerUser,
+  getUserProfile,
+  updateUserProfile,
+  getUsers,
+  deleteUser,
+};
