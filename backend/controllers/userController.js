@@ -93,6 +93,14 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.findById();
+
+  res.json({
+    users,
+  });
+});
+
 // ==============  TESTING SECTION  ========================
 
 // const authUser = asyncHandler(async (req, res) => {
@@ -127,4 +135,4 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 //   res.send('SUCCESS');
 // });
 
-export { authUser, registerUser, getUserProfile, updateUserProfile };
+export { authUser, registerUser, getUserProfile, updateUserProfile, getUsers };

@@ -15,7 +15,7 @@ const orderSchema = mongoose.Schema(
         price: { type: Number, required: true },
         productId: {
           type: mongoose.Schema.Types.ObjectID,
-          required: true, // nu sunt sigur de asta daca trebuie sa fie false inca (LIPSESTE PRODUCT DIN ORDER ITEMS)
+          required: true,
           ref: 'Product',
         },
       },
@@ -29,7 +29,7 @@ const orderSchema = mongoose.Schema(
     },
     paymentMethod: {
       type: String,
-      require: true,
+      required: true,
     },
     paymentResult: {
       id: { type: String },
@@ -39,22 +39,22 @@ const orderSchema = mongoose.Schema(
     },
     taxPrice: {
       type: Number,
-      require: true,
+      required: true,
       default: 0.0,
     },
     shippingPrice: {
       type: Number,
-      require: true,
+      required: true,
       default: 0.0,
     },
     totalPrice: {
       type: Number,
-      require: true,
+      required: true,
       default: 0.0,
     },
     isPaid: {
       type: Boolean,
-      require: true,
+      required: true,
       default: false,
     },
     paidAt: {

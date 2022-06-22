@@ -64,7 +64,7 @@ const LoginScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Button type='submit' variant='primary' className='btn-margin-top'>
+        <Button type='submit' variant='success' className='btn-margin-top'>
           Sign In
         </Button>
       </Form>

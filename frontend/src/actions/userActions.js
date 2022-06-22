@@ -1,8 +1,13 @@
 import axios from 'axios';
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
+  USER_DETAILS_RESET,
   USER_DETAILS_SUCCES,
+  USER_LIST_FAIL,
+  USER_LIST_REQUEST,
+  USER_LIST_SUCCES,
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCES,
@@ -47,6 +52,12 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: USER_LOGOUT,
   });
+  dispatch({
+    type: USER_DETAILS_RESET,
+  });
+  dispatch({
+    type: ORDER_LIST_MY_RESET,
+  });
 };
 
 export const register = (name, email, password) => async (dispatch) => {
@@ -81,11 +92,6 @@ export const register = (name, email, password) => async (dispatch) => {
 export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
-
-    // const x = getState();
-    // console.log(x);
-
-    // ???????????????????????????????????
     const {
       storeUserLogin: { userInfo },
     } = getState();
@@ -100,6 +106,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/users/${id}`, config);
 
     dispatch({ type: USER_DETAILS_SUCCES, payload: data });
+
+    // console.log('a fost dispatchuit din userActions');
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
@@ -115,7 +123,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
     // const x = getState();
     // console.log(x);
 
-    // ???????????????????????????????????
     const {
       storeUserLogin: { userInfo },
     } = getState();
@@ -133,6 +140,34 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload: error,
+    });
+  }
+};
+
+export const listUsersProfile = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_LIST_REQUEST });
+
+    // const x = getState();
+    // console.log(x);
+
+    const {
+      storeUserLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/users`, config);
+
+    dispatch({ type: USER_LIST_SUCCES, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_LIST_FAIL,
       payload: error,
     });
   }

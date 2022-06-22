@@ -90,6 +90,7 @@ const PlaceOrderScreen = () => {
                             alt={item.name}
                             fluid
                             rounded
+                            className='image-shadow'
                           ></Image>
                         </Col>
 
@@ -159,6 +160,7 @@ const PlaceOrderScreen = () => {
                     className='btn-block'
                     disabled={cart.cartItems === 0}
                     onClick={placeOrderHandler}
+                    variant='success'
                   >
                     Place Order
                   </Button>

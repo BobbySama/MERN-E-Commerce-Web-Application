@@ -9,6 +9,8 @@ import { listProducts } from '../actions/productActions';
 const HomeScreen = () => {
   const dispatch = useDispatch();
 
+  // document.body.style.background = '#3596B5';
+
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
@@ -26,7 +28,7 @@ const HomeScreen = () => {
       ) : (
         <Row>
           {products.map((productElem) => (
-            <Col key={productElem._id} xs={6} sm={6} md={6} lg={3}>
+            <Col key={productElem._id} xs={12} sm={6} md={4} lg={3}>
               <Product productProp={productElem} />
             </Col>
           ))}

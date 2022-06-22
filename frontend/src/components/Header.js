@@ -1,8 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import {
+  Navbar,
+  Nav,
+  Container,
+  NavDropdown,
+  Form,
+  FormControl,
+  Button,
+} from 'react-bootstrap';
 import { logout } from '../actions/userActions';
+import logo from './logo.ico';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -15,15 +24,39 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <Navbar bg='dark' variant='dark' expand='lg' collapseOnSelect>
+    <header className='sticky'>
+      <Navbar variant='dark' expand='lg' collapseOnSelect className='header'>
         <Container>
+          <img
+            alt='brand logo'
+            src={logo}
+            width='50'
+            height='50'
+            className='d-inline-block align-top'
+          />
           <LinkContainer to='/'>
             {/* header title */}
             <Navbar.Brand className='header-title'>Snow4All</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
+            {/* Search Button */}
+            <Form className='d-flex ms-auto'>
+              <FormControl
+                type='search'
+                placeholder='Search'
+                className='ms-auto'
+                aria-label='Search'
+              ></FormControl>
+              {/* <Button
+                variant='outline-success'
+                size='lg'
+                className='search-button '
+              >
+                <i class='fa-solid fa-magnifying-glass'></i>
+              </Button> */}
+            </Form>
+
             {/* cu ms e margin left */}
             <Nav className='ms-auto'>
               {/* pe=padding-right si ps=padding-left */}

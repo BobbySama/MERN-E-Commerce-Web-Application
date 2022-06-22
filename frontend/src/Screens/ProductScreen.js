@@ -48,7 +48,12 @@ const ProductScreen = () => {
       ) : (
         <Row>
           <Col md={6}>
-            <Image src={product.image} alt={product.name} fluid></Image>
+            <Image
+              src={product.image}
+              alt={product.name}
+              fluid
+              className='image-shadow'
+            ></Image>
           </Col>
 
           <Col md={3}>
@@ -103,7 +108,11 @@ const ProductScreen = () => {
                           onChange={(e) => setQty(e.target.value)}
                         >
                           {[...Array(product.countInStock).keys()].map((e) => (
-                            <option key={e + 1} value={e + 1}>
+                            <option
+                              key={e + 1}
+                              value={e + 1}
+                              style={{ color: '#478fca' }}
+                            >
                               {e + 1}
                             </option>
                           ))}
@@ -120,6 +129,7 @@ const ProductScreen = () => {
                       className='btn-block'
                       type='button'
                       disabled={product.countInStock === 0}
+                      variant='success'
                     >
                       Add to cart
                     </Button>

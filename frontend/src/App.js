@@ -15,6 +15,7 @@ import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 import OrderScreen from './Screens/OrderScreen';
 
 function App() {
+  document.body.style.background = '#3596B5';
   return (
     <Router>
       <Header />

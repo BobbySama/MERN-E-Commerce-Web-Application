@@ -67,6 +67,7 @@ const CartScreen = () => {
                       alt={item.name}
                       fluid
                       rounded
+                      className='image-shadow'
                     ></Image>
                   </Col>
 
@@ -93,7 +94,13 @@ const CartScreen = () => {
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((e) => (
-                        <option key={e + 1} value={e + 1}>
+                        <option
+                          key={e + 1}
+                          value={e + 1}
+                          style={{
+                            color: '#478fca',
+                          }}
+                        >
                           {e + 1}
                         </option>
                       ))}
@@ -103,6 +110,7 @@ const CartScreen = () => {
                   {/* Remove item from the cart */}
                   <Col md={2}>
                     <Button
+                      className='trash-color'
                       type='button'
                       variant='light'
                       onClick={() => removeFromCartHandler(item.productId)}
@@ -138,6 +146,7 @@ const CartScreen = () => {
                   type='button'
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
+                  variant='success'
                 >
                   Checkout
                 </Button>

@@ -126,6 +126,7 @@ const OrderScreen = () => {
                             alt={item.name}
                             fluid
                             rounded
+                            className='image-shadow'
                           ></Image>
                         </Col>
 
