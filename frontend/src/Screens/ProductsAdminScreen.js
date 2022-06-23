@@ -3,9 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import { deleteProduct, listProducts } from '../actions/productActions';
+import {
+  deleteProduct,
+  listProducts,
+  createProduct,
+} from '../actions/productActions';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
+
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants';
 
 const ProductsAdminScreen = () => {
   const dispatch = useDispatch();
@@ -16,22 +22,37 @@ const ProductsAdminScreen = () => {
   const { loading, error, products } = productList;
 
   const productDelete = useSelector((state) => state.storeProductDelete);
+  const { loading: loadingDelete, success: deleteSuccess } = productDelete;
+
+  const productCreate = useSelector((state) => state.storeProductCreate);
   const {
-    loading: loadingDelete,
-    error: errorDelete,
-    success: deleteSuccess,
-  } = productDelete;
+    loading: loadingCreate,
+    success: successCreate,
+    product: createdProduct,
+  } = productCreate;
 
   const userLogin = useSelector((state) => state.storeUserLogin);
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
-      dispatch(listProducts());
-    } else {
+    dispatch({ type: PRODUCT_CREATE_RESET });
+    if (!userInfo.isAdmin) {
       navigate(`/login`);
     }
-  }, [dispatch, navigate, userInfo, deleteSuccess]);
+
+    if (successCreate) {
+      navigate(`/admin/product/${createdProduct._id}/edit`);
+    } else {
+      dispatch(listProducts());
+    }
+  }, [
+    dispatch,
+    navigate,
+    userInfo,
+    deleteSuccess,
+    successCreate,
+    createdProduct,
+  ]);
 
   const deleteHandler = (id) => {
     if (window.confirm('Are you sure?')) {
@@ -40,7 +61,7 @@ const ProductsAdminScreen = () => {
   };
 
   const createProductHandler = () => {
-    // add product
+    dispatch(createProduct());
   };
 
   return (
@@ -60,6 +81,7 @@ const ProductsAdminScreen = () => {
         </Col>
       </Row>
       {loadingDelete && <Loader></Loader>}
+      {loadingCreate && <Loader></Loader>}
       {loading ? (
         <Loader></Loader>
       ) : error ? (
