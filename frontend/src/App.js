@@ -16,6 +16,7 @@ import OrderScreen from './Screens/OrderScreen';
 import UserListScreen from './Screens/UserListScreen';
 import UserEditScreen from './Screens/UserEditScreen';
 import ProductsAdminScreen from './Screens/ProductsAdminScreen';
+import ProductEditScreen from './Screens/ProductEditScreen';
 
 function App() {
   document.body.style.background = '#3596B5';
@@ -35,6 +36,12 @@ function App() {
             <Route
               path='/admin/productlist'
               element={<ProductsAdminScreen />}
+            />
+
+            {/* Products Edit Admin screen */}
+            <Route
+              path='/admin/product/:id/edit'
+              element={<ProductEditScreen />}
             />
 
             {/* LoginScreen */}

@@ -5,9 +5,16 @@ import { Link, useParams } from 'react-router-dom';
 import { ListGroup, Image, Card, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
-import { getOrderDetails, payOrder } from '../actions/orderActions';
 import Loader from '../components/Loader';
-import { ORDER_PAY_RESET } from '../constants/orderConstants';
+import {
+  getOrderDetails,
+  payOrder,
+  deliverOrder,
+} from '../actions/orderActions';
+import {
+  ORDER_PAY_RESET,
+  ORDER_DELIVER_RESET,
+} from '../constants/orderConstants';
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
@@ -20,6 +27,12 @@ const OrderScreen = () => {
 
   const orderPay = useSelector((state) => state.storeOrderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector((state) => state.storeOrderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
+
+  const userLogin = useSelector((state) => state.storeUserLogin);
+  const { userInfo } = userLogin;
 
   let itemsPrice = '';
 
@@ -40,8 +53,9 @@ const OrderScreen = () => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay) {
+    if (!order || successPay || successDeliver) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if (!order.isPaid) {
       if (!window.paypal) {
@@ -50,11 +64,30 @@ const OrderScreen = () => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, successPay, order]);
+  }, [dispatch, orderId, successPay, order, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
   };
+
+  const deliverHandler = () => {
+    dispatch(deliverOrder(order));
+  };
+
+  // if (
+  //   typeof userInfo.isAdmin === 'undefined' &&
+  //   typeof order.isPaid === 'undefined' &&
+  //   typeof !order.isDelivered === 'undefined'
+  // ) {
+  //   userInfo.isAdmin = '';
+  //   order.isPaid = '';
+  //   order.isDelivered = '';
+  // }
+
+  // console.log('admin: ', userInfo.isAdmin);
+  // console.log('is paid: ', order.isPaid);
+  // console.log('is delivered ', !order.isDelivered);
+  // console.log('order', order);
 
   return loading ? (
     <Loader></Loader>
@@ -200,6 +233,18 @@ const OrderScreen = () => {
                       onSuccess={successPaymentHandler}
                     ></PayPalButton>
                   )}
+                  {loadingDeliver && <Loader></Loader>}
+                  {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+                    <ListGroup.Item>
+                      <Button
+                        type='button'
+                        className='btn btn-clock'
+                        onClick={deliverHandler}
+                      >
+                        Mark as delivered
+                      </Button>
+                    </ListGroup.Item>
+                  )} */}
                 </ListGroup.Item>
               )}
             </ListGroup>

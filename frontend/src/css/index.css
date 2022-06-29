@@ -87,3 +87,7 @@ h1{
     left:765px;
     top:17.15spx;
 }
+
+.btn-no-border{
+    border-radius:  0!important;
+}
