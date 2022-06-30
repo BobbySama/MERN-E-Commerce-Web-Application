@@ -17,6 +17,7 @@ import UserListScreen from './Screens/UserListScreen';
 import UserEditScreen from './Screens/UserEditScreen';
 import ProductsAdminScreen from './Screens/ProductsAdminScreen';
 import ProductEditScreen from './Screens/ProductEditScreen';
+import OrderListScreen from './Screens/OrderListScreen';
 
 function App() {
   document.body.style.background = '#3596B5';
@@ -26,6 +27,8 @@ function App() {
       <main className='py-3'>
         <Container>
           <Routes>
+            {/* ===================================ADMIN PART================================== */}
+
             {/* Admin screen */}
             <Route path='/admin/userlist' element={<UserListScreen />} />
 
@@ -43,6 +46,11 @@ function App() {
               path='/admin/product/:id/edit'
               element={<ProductEditScreen />}
             />
+
+            {/* Orders Admin screen */}
+            <Route path='/admin/orderlist' element={<OrderListScreen />} />
+
+            {/* ================================USER PART==================================== */}
 
             {/* LoginScreen */}
             <Route path='/login' element={<LoginScreen />} />

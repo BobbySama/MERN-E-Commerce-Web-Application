@@ -59,14 +59,18 @@ const Header = () => {
             {/* cu ms e margin left */}
             <Nav className='ms-auto'>
               {/* pe=padding-right si ps=padding-left */}
-              <LinkContainer to='/cart'>
-                <Nav.Link className='pe-4'>
-                  <i className='fas fa-shopping-cart'></i> Cart
+              <LinkContainer to='/cart' className='pe-4 header-title'>
+                <Nav.Link>
+                  <i className='fas fa-shopping-cart '></i> Cart
                 </Nav.Link>
               </LinkContainer>
               {userInfo ? (
                 /* if there is an user loged in we display the followinf NavDropdown */
-                <NavDropdown title={userInfo.name} id='username'>
+                <NavDropdown
+                  title={<span className='header-title'>{userInfo.name}</span>}
+                  id='username'
+                  className='header-title'
+                >
                   <LinkContainer to='/profile'>
                     <NavDropdown.Item>Profile</NavDropdown.Item>
                   </LinkContainer>
@@ -76,15 +80,19 @@ const Header = () => {
                 </NavDropdown>
               ) : (
                 /* if there is NO user loged in we display just the sign in button */
-                <LinkContainer to='/login'>
+                <LinkContainer to='/login' className='header-title'>
                   <Nav.Link>
-                    <i className='fas fa-user'></i> Sign In
+                    <i className='fas fa-user '></i> Sign In
                   </Nav.Link>
                 </LinkContainer>
               )}
 
               {userInfo && userInfo.isAdmin && (
-                <NavDropdown title='Admin' id='adminmenu'>
+                <NavDropdown
+                  title={<span className='header-title'>Admin</span>}
+                  id='adminmenu'
+                  className='header-title'
+                >
                   <LinkContainer to='/admin/userlist'>
                     <NavDropdown.Item>Users</NavDropdown.Item>
                   </LinkContainer>

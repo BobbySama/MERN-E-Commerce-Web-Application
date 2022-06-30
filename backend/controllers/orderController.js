@@ -91,10 +91,17 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   }
 });
 
+// Get details about orders as ADMIN
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders);
+});
+
 export {
   addOrderItems,
   getOrderById,
   updateOrderToPaid,
   getMyOrders,
   updateOrderToDelivered,
+  getOrders,
 };
