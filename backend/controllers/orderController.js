@@ -27,10 +27,6 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
     const createdOrder = await order.save();
 
-    // console.log(
-    //   'din backend al doielea orderItems dupa creare:',
-    //   createdOrder.orderItems
-    // );
     res.status(201).json(createdOrder);
   }
 });

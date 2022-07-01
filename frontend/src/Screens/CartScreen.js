@@ -32,7 +32,6 @@ const CartScreen = () => {
   // remove item from cart
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id));
-    console.log('a fost apasat');
   };
 
   // go to the checkout page

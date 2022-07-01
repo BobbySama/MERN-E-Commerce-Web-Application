@@ -23,8 +23,7 @@ const RegisterScreen = () => {
   const [emailMessage, setemailMessage] = useState(null);
 
   const userRegister = useSelector((state) => state.storeUserRegister);
-  // console.log(userRegister);
-  const { loading, error, userInfo } = userRegister;
+  const { loading, userInfo } = userRegister;
 
   const redirect = location.search ? location.search.split('=')[1] : '/';
 

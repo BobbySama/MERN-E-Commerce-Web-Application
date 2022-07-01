@@ -23,9 +23,6 @@ const UserEditScreen = () => {
   const userUpdate = useSelector((state) => state.storeUserUpdate);
   const { loading: loadingUpdate, success: successUpdate } = userUpdate;
 
-  //   console.log(userInfo.name);
-  //   console.log('userDetails contine:', userDetails);
-
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });

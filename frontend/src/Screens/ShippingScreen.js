@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Form, Button, Row, Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import FormContainer from '../components/FormContainer';
 import { saveShippingAddress } from '../actions/cartActions';
@@ -21,7 +21,6 @@ const ShippingScreen = () => {
     e.preventDefault();
     dispatch(saveShippingAddress({ address, city, postalCode, country }));
     navigate('/payment');
-    console.log('aici e submitul la shipping');
   };
 
   return (

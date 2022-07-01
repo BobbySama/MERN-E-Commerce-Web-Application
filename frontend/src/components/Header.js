@@ -12,7 +12,6 @@ const Header = () => {
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
-    console.log('am iesit merge butonu de logout');
     dispatch(logout());
   };
 

@@ -25,10 +25,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
   try {
     dispatch({ type: ORDER_CREATE_REQUEST });
 
-    // const x = getState();
-    // console.log(x);
-
-    // ???????????????????????????????????
     const {
       storeUserLogin: { userInfo },
     } = getState();
@@ -127,8 +123,6 @@ export const listMyOrders = () => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/orders/myorders`, config);
 
     dispatch({ type: ORDER_LIST_MY_SUCCESS, payload: data });
-
-    console.log('a fost dispatchuit din orderActions');
   } catch (error) {
     dispatch({
       type: ORDER_LIST_MY_FAIL,

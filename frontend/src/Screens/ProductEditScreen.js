@@ -33,9 +33,6 @@ const ProductEditScreen = () => {
     success: successUpdate,
   } = productUpdate;
 
-  //   console.log(userInfo.name);
-  //   console.log('userDetails contine:', userDetails);
-
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: PRODUCT_UPDATE_RESET });

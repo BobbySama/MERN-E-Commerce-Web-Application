@@ -117,8 +117,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
     const { data } = await axios.get(`/api/users/${id}`, config);
 
     dispatch({ type: USER_DETAILS_SUCCES, payload: data });
-
-    // console.log('a fost dispatchuit din userActions');
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
@@ -130,9 +128,6 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
 export const updateUserProfile = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
-
-    // const x = getState();
-    // console.log(x);
 
     const {
       storeUserLogin: { userInfo },
@@ -160,9 +155,6 @@ export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_LIST_REQUEST });
 
-    // const x = getState();
-    // console.log(x);
-
     const {
       storeUserLogin: { userInfo },
     } = getState();
@@ -188,9 +180,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DELETE_REQUEST });
 
-    // const x = getState();
-    // console.log(x);
-
     const {
       storeUserLogin: { userInfo },
     } = getState();
@@ -215,9 +204,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 export const updateUser = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST });
-
-    // const x = getState();
-    // console.log(x);
 
     const {
       storeUserLogin: { userInfo },

@@ -87,21 +87,6 @@ const OrderScreen = () => {
     dispatch(deliverOrder(order));
   };
 
-  // if (
-  //   typeof userInfo.isAdmin === 'undefined' &&
-  //   typeof order.isPaid === 'undefined' &&
-  //   typeof !order.isDelivered === 'undefined'
-  // ) {
-  //   userInfo.isAdmin = '';
-  //   order.isPaid = '';
-  //   order.isDelivered = '';
-  // }
-
-  // console.log('admin: ', userInfo.isAdmin);
-  // console.log('is paid: ', order.isPaid);
-  // console.log('is delivered ', !order.isDelivered);
-  // console.log('order', order);
-
   return loading ? (
     <Loader></Loader>
   ) : error ? (
