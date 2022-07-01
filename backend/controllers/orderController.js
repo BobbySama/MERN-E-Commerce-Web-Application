@@ -76,7 +76,13 @@ const getMyOrders = asyncHandler(async (req, res) => {
   res.json(orders);
 });
 
-// update order to paid
+// Get details about orders as ADMIN
+const getOrders = asyncHandler(async (req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.json(orders);
+});
+
+// update order to delivered
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
 
@@ -89,12 +95,6 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
   } else {
     res.status(400);
   }
-});
-
-// Get details about orders as ADMIN
-const getOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({}).populate('user', 'id name');
-  res.json(orders);
 });
 
 export {

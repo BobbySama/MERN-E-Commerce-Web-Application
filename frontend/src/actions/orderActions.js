@@ -178,13 +178,9 @@ export const deliverOrder = (order) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.put(
-      `/api/orders/${order._id}/deliver`,
-      {},
-      config
-    );
+    await axios.put(`/api/orders/${order._id}/deliver`, {}, config);
 
-    dispatch({ type: ORDER_DELIVER_SUCCESS, payload: data });
+    dispatch({ type: ORDER_DELIVER_SUCCESS });
   } catch (error) {
     dispatch({
       type: ORDER_DELIVER_FAIL,

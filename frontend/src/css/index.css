@@ -2,11 +2,13 @@ h1,h2,h3,h3{
     color: #FFEACE!important;
 }
 
-h1{
-    font-family:Syne; 
-    display: inline-block;
-  font-size: 32px;
-    transform: scale(0.75, 1);
+h1,h2{
+    /* font-family:Syne;  */
+    /* display: inline-block;
+    font-size: 32px;
+    transform: scale(0.75, 1); */
+
+    font-family: 'Nunito', sans-serif;
 }
 
 .header-title:hover{

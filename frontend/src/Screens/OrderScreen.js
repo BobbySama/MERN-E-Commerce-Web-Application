@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ListGroup, Image, Card, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
@@ -18,6 +18,7 @@ import {
 
 const OrderScreen = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const orderId = useParams().id;
 
   const [sdkReady, setSdkReady] = useState(false);
@@ -41,6 +42,10 @@ const OrderScreen = () => {
   }
 
   useEffect(() => {
+    if (!userInfo) {
+      navigate('/login');
+    }
+
     const addPayPallScript = async () => {
       const { data: clientId } = await axios.get('/api/config/paypal');
       const script = document.createElement('script');
@@ -64,7 +69,15 @@ const OrderScreen = () => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, orderId, successPay, order, successDeliver]);
+  }, [
+    dispatch,
+    navigate,
+    userInfo,
+    orderId,
+    successPay,
+    order,
+    successDeliver,
+  ]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -234,19 +247,25 @@ const OrderScreen = () => {
                     ></PayPalButton>
                   )}
                   {loadingDeliver && <Loader></Loader>}
-                  {/* {userInfo.isAdmin && order.isPaid && !order.isDelivered && (
-                    <ListGroup.Item>
+                </ListGroup.Item>
+              )}
+
+              {userInfo &&
+                userInfo.isAdmin &&
+                order.isPaid &&
+                !order.isDelivered && (
+                  <ListGroup.Item>
+                    <div className='d-grid gap-2'>
                       <Button
                         type='button'
-                        className='btn btn-clock'
+                        className='btn'
                         onClick={deliverHandler}
                       >
                         Mark as delivered
                       </Button>
-                    </ListGroup.Item>
-                  )} */}
-                </ListGroup.Item>
-              )}
+                    </div>
+                  </ListGroup.Item>
+                )}
             </ListGroup>
           </Card>
         </Col>
