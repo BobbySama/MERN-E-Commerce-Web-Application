@@ -76,6 +76,9 @@ function App() {
             {/* HomeScreen */}
             <Route path='/' element={<HomeScreen />} exact />
 
+            {/* Search */}
+            <Route path='/search/:keyword' element={<HomeScreen />} />
+
             {/* ProductScreen */}
             <Route path='/product/:id' element={<ProductScreen />} />
 

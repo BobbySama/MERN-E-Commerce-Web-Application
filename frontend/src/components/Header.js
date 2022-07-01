@@ -1,16 +1,10 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
-import {
-  Navbar,
-  Nav,
-  Container,
-  NavDropdown,
-  Form,
-  FormControl,
-} from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions';
 import logo from './logo.ico';
+import SearchBox from './SearchBox';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -39,22 +33,7 @@ const Header = () => {
           </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
-            {/* Search Button */}
-            <Form className='d-flex ms-auto'>
-              <FormControl
-                type='search'
-                placeholder='Search'
-                className='ms-auto'
-                aria-label='Search'
-              ></FormControl>
-              {/* <Button
-                variant='outline-success'
-                size='lg'
-                className='search-button '
-              >
-                <i class='fa-solid fa-magnifying-glass'></i>
-              </Button> */}
-            </Form>
+            <SearchBox></SearchBox>
 
             {/* cu ms e margin left */}
             <Nav className='ms-auto'>
