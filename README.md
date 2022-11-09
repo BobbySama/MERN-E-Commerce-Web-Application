@@ -32,7 +32,7 @@ ProductScreen
 This screen is as example for a product screen. Why I say it is just an example? Because I did not create a different page manually for each product. The React way is to build a template component and map through each product from the backend. In this way you can fetch and display all the necessary information like the image, name, description, price, reviews. I implemented a button to add to the cart the desired quantity of products of each type. The condition for the button to be active is the quantity which must be greater than zero.
 
 
-Car
+CartScreen
 
 ![cart](https://user-images.githubusercontent.com/75377508/200853306-c9fd5c8d-5d6c-4f01-bcc9-c7ee7ea2bea0.JPG)
 tScreen
